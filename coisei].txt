@@ -1,0 +1,67 @@
+/video-site
+    ├── app.py
+    ├── templates
+    │   └── index.html
+    ├── static
+    │   └── videos
+    │       ├── video1.mp4
+    │       └── video2.mp4
+    └── requirements.txt
+
+    from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming Site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="my-4 text-center">
+            <h1>Meu Site de Vídeos</h1>
+        </header>
+        <section class="video-container">
+            <h2>Filmes e Vídeos</h2>
+            <div class="video">
+                <h3>Video 1</h3>
+                <video controls>
+                    <source src="{{ url_for('static', filename='videos/video1.mp4') }}" type="video/mp4">
+                    Seu navegador não suporta o elemento de vídeo.
+                </video>
+            </div>
+            <div class="video">
+                <h3>Video 2</h3>
+                <video controls>
+                    <source src="{{ url_for('static', filename='videos/video2.mp4') }}" type="video/mp4">
+                    Seu navegador não suporta o elemento de vídeo.
+                </video>
+            </div>
+        </section>
+        <footer class="text-center my-4">
+            <p>&copy; 2024 Meu Site de Vídeos. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+Flask==2.2.2
+
+python -m venv venv
+source venv/bin/activate  # Para Windows use `venv\Scripts\activate`
+
+pip install -r requirements.txt
+
+python app.py
